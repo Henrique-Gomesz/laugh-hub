@@ -1,23 +1,33 @@
 import express, { Request, Response, Router } from "express";
-import { connect } from "mongoose";
+import mongoose from "mongoose";
 import { audioRouter } from "./routes/audio-routes";
+import { schedule } from "node-cron";
+import AudioModel from "./models/audio-model";
+const audioModel = new AudioModel();
 require("dotenv").config({ path: __dirname + "/.env" });
 const app = express();
 const route = Router();
-const port = process.env.PORT;
+const PORT = process.env.PORT;
 const DB_URL = process.env.DB_CONNECT ?? "";
+
 app.use(express.json());
 route.get("/", (req: Request, res: Response) => {
   res.json({ message: "OK" });
 });
+
 app.use("/audio", audioRouter);
 app.use(route);
 
-connect(DB_URL)
+mongoose
+  .connect(DB_URL)
   .then(() => {
     console.log("Conectou ao banco");
-    app.listen(port, () => "server running on port 3333");
+    app.listen(PORT, () => "server running on port 3333");
   })
   .catch((error) => {
     console.log(error);
   });
+
+schedule("*/3 * * * *", async () => {
+  await audioModel.updateDatabase();
+});

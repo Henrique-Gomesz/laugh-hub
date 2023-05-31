@@ -3,8 +3,8 @@ import AudioModel from "../models/audio-model";
 export default class AudioContoller {
   listAllAudios = async (req: Request, res: Response) => {
     const audioModel = new AudioModel();
-    const audioButtonList = await audioModel.listAll();
-
-    res.status(200).json({ audioButtonList });
+    await audioModel.updateDatabase();
+    const audioButtonList = await audioModel.listAllFromDataBase();
+    res.status(200).json({ buttons: audioButtonList });
   };
 }

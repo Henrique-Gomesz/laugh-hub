@@ -1,18 +1,11 @@
 import { Schema, model } from "mongoose";
+import { AudioDTO } from "../DTO/audio-dto";
 
-// 1. Create an interface representing a document in MongoDB.
-interface IAudio {
-  name: string;
-  imageUrl: string;
-  audioUrl: string;
-}
-
-// 2. Create a Schema corresponding to the document interface.
-const audioSchema = new Schema<IAudio>({
+const audioSchema = new Schema<AudioDTO>({
   name: { type: String, required: true },
   imageUrl: { type: String, required: true },
   audioUrl: { type: String, required: true },
+  tags: { type: String },
 });
 
-// 3. Create a Model.
-export const AudioModel = model<IAudio>("Audios", audioSchema);
+export const AudioSchema = model<AudioDTO>("Audios", audioSchema);
