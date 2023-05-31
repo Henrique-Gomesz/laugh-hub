@@ -23,11 +23,10 @@ mongoose
   .then(() => {
     console.log("Conectou ao banco");
     app.listen(PORT, () => "server running on port 3333");
+    schedule("*/5 * * * *", async () => {
+      await audioModel.updateDatabase();
+    });
   })
   .catch((error) => {
     console.log(error);
   });
-
-schedule("*/5 * * * *", async () => {
-  await audioModel.updateDatabase();
-});
