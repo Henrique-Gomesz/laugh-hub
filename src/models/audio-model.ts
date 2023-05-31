@@ -36,11 +36,13 @@ export default class AudioModel {
       (item) =>
         dataBaseAudios.find((obj) => obj.name === item.name) === undefined
     );
+    console.log(newAudios, "<<< new audios");
     const removeAudios = dataBaseAudios.filter(
       (item) =>
         fireBaseAudios.find((element) => element.name === item.name) ===
         undefined
     );
+    console.log(removeAudios, "<<< remove audios");
     if (newAudios.length) await AudioSchema.insertMany(newAudios);
 
     if (removeAudios.length)

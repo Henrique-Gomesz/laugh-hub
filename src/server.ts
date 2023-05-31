@@ -28,6 +28,6 @@ mongoose
     console.log(error);
   });
 
-schedule("*/3 * * * *", async () => {
+schedule("*/5 * * * *", async () => {
   await audioModel.updateDatabase();
 });
