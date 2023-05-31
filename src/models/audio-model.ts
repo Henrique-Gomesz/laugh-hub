@@ -18,12 +18,11 @@ export default class AudioModel {
       const imageUrl = matchingImage
         ? await getDownloadURL(matchingImage)
         : "https://pbs.twimg.com/media/E54Tg1eWUAMBVvx?format=png&name=360x360";
-      const newButton: AudioDTO = {
+      buttonList.push({
         name: itemName,
         audioUrl: audioUrl,
         imageUrl: imageUrl,
-      };
-      buttonList.push(newButton);
+      });
     }
     return buttonList;
   };
