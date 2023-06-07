@@ -12,7 +12,7 @@ const DB_URL = process.env.DB_CONNECT ?? "";
 
 app.use(express.json());
 route.get("/", (req: Request, res: Response) => {
-  
+  res.status(200).json({ msg: "OK" });
 });
 
 app.use("/audio", audioRouter);
