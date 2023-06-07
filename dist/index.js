@@ -49,7 +49,7 @@ const PORT = process.env.PORT;
 const DB_URL = (_a = process.env.DB_CONNECT) !== null && _a !== void 0 ? _a : "";
 app.use(express_1.default.json());
 route.get("/", (req, res) => {
-    res.json({ message: "OK" });
+    res.status(200).json({ message: "OK" });
 });
 app.use("/audio", audio_routes_1.audioRouter);
 app.use(route);
